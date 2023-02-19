@@ -1,29 +1,3 @@
-// const express = require('express')
-// const app = express()
-// const PORT = 8080
-
-// app.get('/',(req,res) => {
-//     res.send('prueba')
-// })
-// app.get('/user/:name/:age',(req,res) => {
-//     let nombre = req.params.name
-//     let edad = req.params.age
-//     // res.send('Hola Mundo')
-//     res.json({
-//         nombre:nombre,
-//         edad: edad
-//     })
-// })
-
-// app.get('/profesores',(req,res) => {
-//     console.log(req.query);
-//        res.json({
-//         profesor: req.query.profesor1
-//     })
-// })
-// app.listen(PORT, () => {
-//     console.log('Servidor activo')
-// })
 
 const express = require('express')
 
@@ -44,10 +18,10 @@ app.get('/user/:nombre/:apellido', (req,res) => {
 //SEGUNDO EJERCICIO 
 //Crear una ruta “dividir” la cual reciba dos parámetros (ruta parametrizada) divisor y dividendo, la misma tiene que devolver un res.json({error: "no se puede dividir por cero"}) si el usuario ingresa un 0, si no es el caso devolver res.json({resultado}).
 
-app.get('/dividir', (req,res) => {
-    console.log(req.query)
-    let divisor = req.query.divisor
-    let dividendo = req.query.dividendo
+app.get('/dividir/:divisor/:dividendo', (req,res) => {
+    
+    let divisor = req.params.divisor
+    let dividendo = req.params.dividendo
 
     let resultado = (divisor / dividendo)
 
@@ -64,9 +38,9 @@ app.get('/dividir', (req,res) => {
 // //TERCER EJERCICIO
 //Crear una ruta que sume dos valores (ruta parametrizada), pero poner una condición de que no se puedan enviar números menores que cero, y el resultado se debe devolver por medio de un res.json({resultado}).
 
-app.get('/sumar', (request,response) =>{
-    let num1 = parseInt(request.query.num1)
-    let num2 = parseInt(request.query.num2)
+app.get('/sumar/:num1/:num2', (request,response) =>{
+    let num1 = parseInt(request.params.num1)
+    let num2 = parseInt(request.params.num2)
     let resultado = (num1+num2)
     if(num1 < 0 || num2 < 0) {
         response.json(`No se pueden enviar números menores a 0.  error: ${num1} o ${num2}`)
@@ -97,6 +71,7 @@ app.get('/parimpar', (request,response) => {
 //Crear una ruta “lista de compras” (ruta con query) que devuelva un objeto con 5 productos, se debe usar res.json({objeto}).
 app.get('/lista', (req,res) => {
     let listaProductos = {
+
         producto1: req.query.producto1,
         producto2: req.query.producto2,
         producto3: req.query.producto3,
